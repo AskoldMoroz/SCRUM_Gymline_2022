@@ -46,31 +46,43 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
-            if(binding.emailLogin.text.toString() != "" && binding.passwordLogin.text.toString() != ""){
-                auth.signInWithEmailAndPassword(binding.emailLogin.text.toString(), binding.passwordLogin.text.toString())
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithEmail:success")
-                            val user = auth.currentUser
-                            checkAuthState()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "Authentication failed.(Check email adress or password)",
-                                Toast.LENGTH_SHORT).show()
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                if(binding.emailLogin.text.toString() != "" && binding.passwordLogin.text.toString() != ""){
+                    auth.signInWithEmailAndPassword(binding.emailLogin.text.toString(), binding.passwordLogin.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("TAG", "signInWithEmail:success")
+                                val user = auth.currentUser
+                                checkAuthState()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("TAG", "signInWithEmail:failure", task.exception)
+                                Toast.makeText(baseContext, "Authentication failed.(Check email adress or password)",
+                                    Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
+                }
+                else{
+                    Toast.makeText(baseContext, "Fill up all fields",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
-            else{
-                Toast.makeText(baseContext, "Fill up all fields",
-                    Toast.LENGTH_SHORT).show()
-            }
-
-
         }
         binding.signInGoogle3.setOnClickListener {
-            signInWithGoogle()
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                signInWithGoogle()
+            }
         }
 
         binding.backSignUp.setOnClickListener {
@@ -78,8 +90,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.FrgtPassBtn.setOnClickListener {
-            val i = Intent(this, PasswordReset::class.java)
-            startActivity(i)
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                val i = Intent(this, PasswordReset::class.java)
+                startActivity(i)
+            }
+
         }
     }
 

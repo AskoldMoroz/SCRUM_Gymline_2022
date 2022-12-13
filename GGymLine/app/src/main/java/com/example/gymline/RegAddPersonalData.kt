@@ -30,48 +30,57 @@ class RegAddPersonalData : AppCompatActivity() {
         val uid = auth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance("https://gymline-33603-default-rtdb.europe-west1.firebasedatabase.app").getReference("Users")
         binding.saveBtn.setOnClickListener {
-            val firstName = intent.getStringExtra("firstName").toString().trim().toCharArray()[0].uppercase() + intent.getStringExtra("firstName").toString().trim().drop(1)
-            val lastName = intent.getStringExtra("lastName").toString().trim().toCharArray()[0].uppercase() + intent.getStringExtra("lastName").toString().trim().drop(1)
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                val firstName = intent.getStringExtra("firstName").toString().trim().toCharArray()[0].uppercase() + intent.getStringExtra("firstName").toString().trim().drop(1)
+                val lastName = intent.getStringExtra("lastName").toString().trim().toCharArray()[0].uppercase() + intent.getStringExtra("lastName").toString().trim().drop(1)
 
-            val birthdate = binding.regBirthDate.text.toString().trim()
-            val weight = binding.regWeight.text.toString().trim()
-            val height = binding.regHeight.text.toString().trim()
-            var gender = "";
-            if(binding.regGender.isChecked){gender = "Female"}
-            else{gender = "Male"}
+                val birthdate = binding.regBirthDate.text.toString().trim()
+                val weight = binding.regWeight.text.toString().trim()
+                val height = binding.regHeight.text.toString().trim()
+                var gender = "";
+                if(binding.regGender.isChecked){gender = "Female"}
+                else{gender = "Male"}
 
-            if(birthdate != "" && weight != "" && height != "" && gender != ""){
-                if(weight.toInt() >= 35){
-                    if(height.toInt() >= 110){
-                        val user = User(firstName, lastName, gender, birthdate, weight, height )
-                        if(uid != null){
-                            databaseReference.child(uid).setValue(user).addOnCompleteListener{
-                                if(it.isSuccessful){
-                                    val i = Intent(this, preHomeScreen::class.java)
-                                    i.putExtra("firstName", firstName)
-                                    startActivity(i)
-                                }
-                                else{
-                                    Toast.makeText(this@RegAddPersonalData,
-                                        "Failed to update profile", Toast.LENGTH_SHORT).show()
+                if(birthdate != "" && weight != "" && height != "" && gender != ""){
+                    if(weight.toInt() >= 35){
+                        if(height.toInt() >= 110){
+                            val user = User(firstName, lastName, gender, birthdate, weight, height )
+                            if(uid != null){
+                                databaseReference.child(uid).setValue(user).addOnCompleteListener{
+                                    if(it.isSuccessful){
+                                        val i = Intent(this, preHomeScreen::class.java)
+                                        i.putExtra("firstName", firstName)
+                                        startActivity(i)
+                                    }
+                                    else{
+                                        Toast.makeText(this@RegAddPersonalData,
+                                            "Failed to update profile", Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
+                        }
+                        else{
+                            Toast.makeText(this@RegAddPersonalData,
+                                "Sorry, min height is 110cm", Toast.LENGTH_SHORT).show()
                         }
                     }
                     else{
                         Toast.makeText(this@RegAddPersonalData,
-                            "Sorry, min height is 110cm", Toast.LENGTH_SHORT).show()
+                            "Sorry, min weight is 35kg", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else{
                     Toast.makeText(this@RegAddPersonalData,
-                        "Sorry, min weight is 35kg", Toast.LENGTH_SHORT).show()
+                        "Fill up all fields", Toast.LENGTH_SHORT).show()
                 }
             }
-            else{
-                Toast.makeText(this@RegAddPersonalData,
-                    "Fill up all fields", Toast.LENGTH_SHORT).show()
-            }
+
 
 
         }
