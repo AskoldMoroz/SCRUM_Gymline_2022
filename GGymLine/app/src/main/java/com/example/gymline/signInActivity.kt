@@ -1,11 +1,8 @@
 package com.example.gymline
 
-import com.example.gymline.R
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputFilter
 import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,7 +60,13 @@ class signInActivity : AppCompatActivity() {
             }
         }
         binding.signInGoogle.setOnClickListener {
-            signInWithGoogle()
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else signInWithGoogle()
 
         }
 
@@ -71,49 +74,58 @@ class signInActivity : AppCompatActivity() {
 
 
         binding.registerBtn.setOnClickListener {
-            sEmail = binding.regEmail.text.toString()
-            sPassword = binding.regPassword.text.toString()
-            sFirstName = binding.regFirstName.text.toString()
-            sLastName = binding.regLastName.text.toString()
-            if (sEmail != "" && sPassword != "" && sFirstName != "" && sLastName != "") {
-                auth.createUserWithEmailAndPassword(sEmail, sPassword)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            Log.d("TAG", "createUserWithEmail:success")
-                            val user = auth.currentUser
-                            if (auth.currentUser != null) {
-                                val i = Intent(this, RegAddPersonalData::class.java)
-                                i.putExtra("firstName", sFirstName )
-                                i.putExtra("lastName", sLastName)
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                startActivity(i)
-                                finish()
-                                startActivity(i)
-                            }
-                        } else {
-                            Log.w("TAG", "createUserWithEmail:failure", task.exception)
-                            if (sPassword.length < 6){
-                                Toast.makeText(
-                                    baseContext, "Password must be at least 6 chars long",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            else{
-                                Toast.makeText(
-                                    baseContext, "Incorrect email",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
-            } else {
+            if (!InternetConn.internetIsConnected()){
                 Toast.makeText(
-                    baseContext, "Fill up all fields.",
+                    baseContext, "No internet connection",
                     Toast.LENGTH_SHORT
                 ).show()
             }
+            else{
+                sEmail = binding.regEmail.text.toString()
+                sPassword = binding.regPassword.text.toString()
+                sFirstName = binding.regFirstName.text.toString()
+                sLastName = binding.regLastName.text.toString()
+                if (sEmail != "" && sPassword != "" && sFirstName != "" && sLastName != "") {
+                    auth.createUserWithEmailAndPassword(sEmail, sPassword)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                Log.d("TAG", "createUserWithEmail:success")
+                                val user = auth.currentUser
+                                if (auth.currentUser != null) {
+                                    val i = Intent(this, RegAddPersonalData::class.java)
+                                    i.putExtra("firstName", sFirstName )
+                                    i.putExtra("lastName", sLastName)
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    startActivity(i)
+                                    finish()
+                                    startActivity(i)
+                                }
+                            } else {
+                                Log.w("TAG", "createUserWithEmail:failure", task.exception)
+                                if (sPassword.length < 6){
+                                    Toast.makeText(
+                                        baseContext, "Password must be at least 6 chars long",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                else{
+                                    Toast.makeText(
+                                        baseContext, "Incorrect email",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                } else {
+                    Toast.makeText(
+                        baseContext, "Fill up all fields.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
 
 
         }
@@ -183,11 +195,12 @@ class signInActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(
-                    baseContext, "GOVNO",
+                    baseContext, "Error",
                     Toast.LENGTH_LONG
                 ).show()
             }
 
         })
     }
+
 }

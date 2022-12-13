@@ -53,8 +53,22 @@ class MainActivity : AppCompatActivity() {
                         "Current page: Profile", Toast.LENGTH_SHORT).show()
                 }
                 R.id.logout -> {
-                    auth.signOut()
-                    val i = Intent(this, signInActivity::class.java)
+                    if (!InternetConn.internetIsConnected()){
+                        Toast.makeText(
+                            baseContext, "No internet connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    else{
+                        auth.signOut()
+                        val i = Intent(this, signInActivity::class.java)
+                        startActivity(i)
+                        finish()
+                    }
+
+                }
+                R.id.courses -> {
+                    val i = Intent(this, CoursesActivity::class.java)
                     startActivity(i)
                     finish()
                 }
@@ -66,58 +80,73 @@ class MainActivity : AppCompatActivity() {
         uid = auth.currentUser?.uid.toString()
 
         databaseReference = FirebaseDatabase.getInstance("https://gymline-33603-default-rtdb.europe-west1.firebasedatabase.app").getReference("Users")
-        if(uid.isNotEmpty()){
-            getUserData()
+        if (!InternetConn.internetIsConnected()){
+            Toast.makeText(
+                baseContext, "No internet connection",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            if(uid.isNotEmpty()){
+                getUserData()
+        }
+
         }
 
         binding.saveProfileDataBtn.setOnClickListener {
+            if (!InternetConn.internetIsConnected()){
+                Toast.makeText(
+                    baseContext, "No internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                if(binding.editBirthDate.text.toString().trim() != "" && binding.editWeight.text.toString().trim() != "" && binding.editHeight.text.toString().trim() != ""
+                    && binding.editFirstName.text.toString().trim() != "" && binding.editLastName.text.toString().trim()  != ""){
 
+                    val firstName = binding.editFirstName.text.toString().trim().toCharArray()[0].uppercase() + binding.editFirstName.text.toString().trim().drop(1)
+                    val lastName = binding.editLastName.text.toString().trim().toCharArray()[0].uppercase() + binding.editLastName.text.toString().trim().drop(1)
 
-            if(binding.editBirthDate.text.toString().trim() != "" && binding.editWeight.text.toString().trim() != "" && binding.editHeight.text.toString().trim() != ""
-                && binding.editFirstName.text.toString().trim() != "" && binding.editLastName.text.toString().trim()  != ""){
+                    val birthdate = binding.editBirthDate.text.toString().trim()
+                    val weight = binding.editWeight.text.toString().trim()
+                    val height = binding.editHeight.text.toString().trim()
+                    var gender = "";
+                    if(binding.regGender.isChecked){gender = "Female"}
+                    else{gender = "Male"}
 
-                val firstName = binding.editFirstName.text.toString().trim().toCharArray()[0].uppercase() + binding.editFirstName.text.toString().trim().drop(1)
-                val lastName = binding.editLastName.text.toString().trim().toCharArray()[0].uppercase() + binding.editLastName.text.toString().trim().drop(1)
+                    val user = User(firstName, lastName, gender, birthdate, weight, height )
+                    if(weight.toInt() >= 35){
+                        if(height.toInt() >= 110){
+                            if(uid != null){
+                                databaseReference.child(uid).setValue(user).addOnCompleteListener{
+                                    if(it.isSuccessful){
+                                        val i = Intent(this, preHomeScreen::class.java)
+                                        i.putExtra("firstName", firstName)
+                                        startActivity(i)
 
-                val birthdate = binding.editBirthDate.text.toString().trim()
-                val weight = binding.editWeight.text.toString().trim()
-                val height = binding.editHeight.text.toString().trim()
-                var gender = "";
-                if(binding.regGender.isChecked){gender = "Female"}
-                else{gender = "Male"}
+                                        if(this::imageUri.isInitialized) uploadProfilePic()
+                                    }
+                                    else{
 
-                val user = User(firstName, lastName, gender, birthdate, weight, height )
-                if(weight.toInt() >= 35){
-                    if(height.toInt() >= 110){
-                        if(uid != null){
-                            databaseReference.child(uid).setValue(user).addOnCompleteListener{
-                                if(it.isSuccessful){
-                                    val i = Intent(this, preHomeScreen::class.java)
-                                    i.putExtra("firstName", firstName)
-                                    startActivity(i)
-
-                                    if(this::imageUri.isInitialized) uploadProfilePic()
+                                        Toast.makeText(this@MainActivity,
+                                            "Failed to update profile", Toast.LENGTH_SHORT).show()
+                                    }
                                 }
-                                else{
+                            }} else{Toast.makeText(this@MainActivity,
+                            "Sorry, min height is 110cm", Toast.LENGTH_SHORT).show()}}
 
-                                    Toast.makeText(this@MainActivity,
-                                        "Failed to update profile", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                    }} else{Toast.makeText(this@MainActivity,
-                        "Sorry, min height is 110cm", Toast.LENGTH_SHORT).show()}}
+                    else{
+                        Toast.makeText(this@MainActivity,
+                            "Sorry, min weight is 35kg", Toast.LENGTH_SHORT).show()
+                    }
 
+                }
                 else{
                     Toast.makeText(this@MainActivity,
-                        "Sorry, min weight is 35kg", Toast.LENGTH_SHORT).show()
+                        "Fill up all fields", Toast.LENGTH_SHORT).show()
                 }
 
             }
-            else{
-                Toast.makeText(this@MainActivity,
-                    "Fill up all fields", Toast.LENGTH_SHORT).show()
-            }
-
 
         }
         binding.btnDate.setOnClickListener {
@@ -253,7 +282,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private  fun hideProgressBar(){
+    private fun hideProgressBar(){
         dialog.dismiss()
     }
 
