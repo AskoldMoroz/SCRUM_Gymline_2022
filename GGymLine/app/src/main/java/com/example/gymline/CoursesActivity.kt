@@ -54,6 +54,8 @@ class CoursesActivity : AppCompatActivity() {
         binding = ActivityCoursesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btmMenu.menu.getItem(1).isChecked = true
+
         panel = binding.slidingLayout
 
         panel.panelState = SlidingUpPanelLayout.PanelState.HIDDEN
@@ -81,20 +83,24 @@ class CoursesActivity : AppCompatActivity() {
 
                 }
                 R.id.logout -> {
-                    if (!InternetConn.internetIsConnected()){
+                    if (!InternetConn.internetIsConnected()) {
                         Toast.makeText(
                             baseContext, "No internet connection",
                             Toast.LENGTH_SHORT
                         ).show()
-                    }
-                    else{
+                    } else {
                         auth.signOut()
                         val i = Intent(this, signInActivity::class.java)
                         startActivity(i)
                         finish()
                     }
-
                 }
+                R.id.courseAdd -> {
+                        val i = Intent(this, CourseCreator::class.java)
+                        startActivity(i)
+                    finish()
+                    }
+
                 R.id.courses -> {
                     Toast.makeText(this@CoursesActivity,
                         "Current page: Courses", Toast.LENGTH_SHORT).show()
@@ -109,6 +115,7 @@ class CoursesActivity : AppCompatActivity() {
         }).start()
     }
     private fun init(input: String?= null, searchFilter: String? = null){
+        adapter.courseList.clear()
         showProgressBar()
         binding.apply {
             rcView.layoutManager = LinearLayoutManager(this@CoursesActivity)
@@ -124,7 +131,7 @@ class CoursesActivity : AppCompatActivity() {
                     val children = snapshot!!.children
                     children.forEach {
                         val course = it.getValue(Course::class.java)
-                        val id = it.key!!.toInt()
+                        val id = it.key!!.toString()
 
                         fun zaebalsa(input: String? = null, searchFilter: String? = null){
                             if(searchFilter.toString().contains(input.toString())){
@@ -137,7 +144,7 @@ class CoursesActivity : AppCompatActivity() {
 
 
                                     val fullCourse =
-                                        FullCourse(course!!.title, course.author, course.desc, id, bitmap)
+                                        FullCourse(course!!.title, course.author, course.desc, course.difficulty, course.type, id, bitmap)
 
                                     adapter.addCourse(fullCourse)
 
@@ -197,6 +204,8 @@ class CoursesActivity : AppCompatActivity() {
                         binding.openedCourseImg.setImageBitmap(fullCourse.img)
                         binding.openedCourseAuthor.text = fullCourse.author
                         binding.openedCourseDesc.text = fullCourse.desc
+                        binding.openedCourseDifficulty.text = fullCourse.difficulty
+                        binding.openedCourseType.text = fullCourse.type
 
                         if(panel.panelState == SlidingUpPanelLayout.PanelState.HIDDEN && isItemClickedOnce)tempItemCourse.findViewById<CardView>(R.id.cardViewItem).setBackgroundColor(Color.parseColor("#ffffff"))
                         tempItemCourse = item
@@ -269,7 +278,7 @@ class CoursesActivity : AppCompatActivity() {
         binding.searchBtn.setOnClickListener {
             binding.apply {
 
-                val input = searchCourseInput.text.toString()
+                val input = searchCourseInput.text.toString().trim()
                 val searchInput = spinner3.selectedItem.toString()
 
                 if(input != ""){

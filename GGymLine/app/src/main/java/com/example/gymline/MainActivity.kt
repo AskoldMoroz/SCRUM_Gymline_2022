@@ -1,7 +1,9 @@
 package com.example.gymline
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var databaseReference2: DatabaseReference
     private lateinit var storageReference: StorageReference
     private lateinit var imageUri: Uri
     private lateinit var dialog: Dialog
@@ -39,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btmMenu.menu.getItem(0).isChecked = true
 
         auth = Firebase.auth
 
@@ -69,6 +74,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.courses -> {
                     val i = Intent(this, CoursesActivity::class.java)
+                    startActivity(i)
+                    finish()
+
+                }
+                R.id.courseAdd -> {
+                    val i = Intent(this, CourseCreator::class.java)
                     startActivity(i)
                     finish()
                 }
