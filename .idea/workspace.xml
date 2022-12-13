@@ -4,48 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f310223-c240-4f19-9cfb-d19de62e1f63" name="Changes" comment="third commit, removed redundant folders">
+    <list default="true" id="5f310223-c240-4f19-9cfb-d19de62e1f63" name="Changes" comment="fifth commit add InternetConn, CoursesActivity, CourseAdapter.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/google-services.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/proguard-rules.pro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/androidTest/java/com/example/gymline/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/androidTest/java/com/example/gymline/ExampleInstrumentedTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/PasswordReset.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/PasswordReset.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/RegAddPersonalData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/RegAddPersonalData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/preHomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/preHomeScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/signInActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/java/com/example/gymline/signInActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_baseline_logout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_baseline_logout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_profilee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/drawable/ic_profilee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_password_reset.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_password_reset.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_pre_home_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_pre_home_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_reg_add_personal_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_reg_add_personal_data.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_sign_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/layout/activity_sign_in.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/menu/bottom_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/menu/bottom_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-land/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-land/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-w1240dp/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-w1240dp/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-w600dp/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values-w600dp/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/xml/backup_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/app/src/test/java/com/example/gymline/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/app/src/test/java/com/example/gymline/ExampleUnitTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GGymLine/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/GGymLine/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669729794534</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fifth commit add InternetConn, CoursesActivity, CourseAdapter.">
+      <created>1670955551448</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670955551448</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +101,7 @@
     <MESSAGE value="first sprint commit" />
     <MESSAGE value="second commit(moving idea &amp; readme files to main folder)" />
     <MESSAGE value="third commit, removed redundant folders" />
-    <option name="LAST_COMMIT_MESSAGE" value="third commit, removed redundant folders" />
+    <MESSAGE value="fifth commit add InternetConn, CoursesActivity, CourseAdapter." />
+    <option name="LAST_COMMIT_MESSAGE" value="fifth commit add InternetConn, CoursesActivity, CourseAdapter." />
   </component>
 </project>
