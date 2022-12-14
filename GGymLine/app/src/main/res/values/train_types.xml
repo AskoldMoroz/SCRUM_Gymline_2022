@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="trainTypes">
+        <item>Endurance</item>
+        <item>Strength</item>
+        <item>Balance</item>
+        <item>Flexibility</item>
+    </string-array>
+</resources>

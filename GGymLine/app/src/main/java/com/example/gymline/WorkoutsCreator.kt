@@ -1,6 +1,8 @@
 package com.example.gymline
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -8,16 +10,21 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.KeyEvent
 import android.view.View
+import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.view.marginTop
 import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gymline.databinding.ActivityExerciseCreatorBinding
 import com.example.gymline.databinding.ActivityWorkoutsCreatorBinding
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -28,6 +35,9 @@ class WorkoutsCreator : AppCompatActivity() {
     private val adapterSets = SetExerciseAdapter()
     private val adapterEx = ExerciseAdapter()
 
+    private val adapterSetForView = SetForViewAdapter()
+
+    private lateinit var dialog: Dialog
 
     lateinit var binding : ActivityWorkoutsCreatorBinding
 
@@ -35,6 +45,8 @@ class WorkoutsCreator : AppCompatActivity() {
     private lateinit var storageReference: StorageReference
 
     private lateinit var tempItem: View
+
+    private var exerciseSetForDBList = ArrayList<ExerciseSetForDB>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +72,16 @@ class WorkoutsCreator : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
+        binding.inputRepeatText.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN &&
+                keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
 
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(binding.inputRepeatText.windowToken, 0)
+                true
+            } else false
+        }
     }
     private fun initEx(){
 
@@ -136,6 +157,8 @@ class WorkoutsCreator : AppCompatActivity() {
                     }
 
                 }
+                binding.scrViewEx
+                binding.scrViewEx.post{binding.scrViewEx.fullScroll(View.FOCUS_DOWN)}
             }
 
         })
@@ -143,7 +166,9 @@ class WorkoutsCreator : AppCompatActivity() {
         binding.openAddWorkoutBtn.setOnClickListener {
             if(binding.openAddWorkoutBtn.text == "Add New Workout"){
                 binding.apply {
-                    scrViewEx.visibility = View.VISIBLE
+                    existingCW.visibility = View.VISIBLE
+                    exRcViewCW.visibility = View.VISIBLE
+                    repsCW.visibility = View.VISIBLE
                     binding.cardView4.visibility = View.VISIBLE
                     textViewExWork.text = "Sets in workout:"
 
@@ -151,11 +176,17 @@ class WorkoutsCreator : AppCompatActivity() {
                     rcViewWorkoutsSets.adapter = adapterSets
 
                     binding.openAddWorkoutBtn.text = "Cancel"
+
+                    workoutDeleteBtn.visibility = View.GONE
+
+                    rcViewEx.adapter = adapterEx
                 }
             }
             else{
                 binding.apply {
-                    scrViewEx.visibility = View.GONE
+                    existingCW.visibility = View.GONE
+                    exRcViewCW.visibility = View.GONE
+                    repsCW.visibility = View.GONE
                     binding.cardView4.visibility = View.GONE
                     textViewExWork.text = "Existing workouts:"
 
@@ -198,11 +229,17 @@ class WorkoutsCreator : AppCompatActivity() {
                         Toast.makeText(this@WorkoutsCreator,
                             "Success", Toast.LENGTH_SHORT).show()
                         initWorkout()
-                        binding.textViewExWork.text = "Existing workouts:"
-                        binding.scrViewEx.visibility = View.GONE
-                        binding.cardView4.visibility = View.GONE
-                        binding.openAddWorkoutBtn.isEnabled = true
-                        adapterSets.setExerciseList.clear()
+                        binding.apply {
+                            textViewExWork.text = "Existing workouts:"
+                            existingCW.visibility = View.GONE
+                            exRcViewCW.visibility = View.GONE
+                            repsCW.visibility = View.GONE
+                            cardView4.visibility = View.GONE
+                            openAddWorkoutBtn.isEnabled = true
+                            openAddWorkoutBtn.text = "Add New Workout"
+                            adapterSets.setExerciseList.clear()
+                        }
+
                     }
                     else{
                         Toast.makeText(this@WorkoutsCreator,
@@ -359,18 +396,121 @@ class WorkoutsCreator : AppCompatActivity() {
 
         }
 
+        adapterSetForView.setOnItemClickListener(object: SetForViewAdapter.OnItemClickListener{
+            override fun onItemClick(exerciseSet: ExerciseSet, item: View) {
+            }
+
+        })
 
         adapterWorkouts.setOnItemClickListener(object: WorkoutAdapter.OnItemClickListener{
             override fun onItemClick(workout: Workout, item: View) {
+                adapterSetForView.setExerciseList.clear()
+                exerciseSetForDBList.clear()
+                showProgressBar()
+                binding.apply {
+                    rcViewEx.layoutManager = LinearLayoutManager(this@WorkoutsCreator)
+                    rcViewEx.adapter = adapterSetForView
 
+                    exRcViewCW.visibility = View.VISIBLE
+
+                    databaseReference = FirebaseDatabase.getInstance("https://gymline-33603-default-rtdb.europe-west1.firebasedatabase.app").getReference("UnfinishedCourses/${tempId}/Workouts/${workout.name}")
+                    databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(snapshotError: DatabaseError) {
+                        }
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if(snapshot.exists()){
+                                val set = snapshot!!.children
+                                set.forEach {
+                                    val exerciseSetForDB = it.getValue(ExerciseSetForDB::class.java)!!
+                                    exerciseSetForDBList.add(exerciseSetForDB)
+                                }
+                                for (i in exerciseSetForDBList.size - 1 downTo  0 step 1) {
+
+                                    databaseReference = FirebaseDatabase.getInstance("https://gymline-33603-default-rtdb.europe-west1.firebasedatabase.app").getReference("UnfinishedCourses/${tempId}/Exercises/${exerciseSetForDBList[i].exerciseName}")
+                                    databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                                        override fun onCancelled(snapshotError: DatabaseError) {
+                                        }
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            if(snapshot.exists()){
+                                                val exerciseShort = snapshot.getValue(ExerciseShort::class.java)!!
+
+                                                val id = snapshot.key!!.toString()
+
+                                                storageReference = FirebaseStorage.getInstance().reference.child("UnfinishedCourses/${tempId}/Exercises/${id}.jpg")
+                                                val localFile = File.createTempFile("tempImage", "jpg")
+                                                storageReference.getFile(localFile).addOnSuccessListener {
+                                                    val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+
+
+                                                    val exercise =
+                                                        Exercise(exerciseShort!!.exTitleShort, bitmap, exerciseShort.exDescShort, id)
+                                                    adapterSetForView.setExerciseList.add(ExerciseSet(exercise, exerciseSetForDBList[i].repeats.toString()))
+                                                }
+
+
+                                            }
+                                        }
+
+                                    })
+                                }
+                                Handler().postDelayed(Runnable {
+
+                                    adapterSetForView.notifyItemRangeRemoved(0, adapterSetForView.setExerciseList.size)
+                                    adapterSetForView.notifyItemRangeInserted(0, adapterSetForView.setExerciseList.size)
+                                    hideProgressBar()
+
+                                }, 2000)
+                            }
+                        }
+
+                    })
+
+
+
+                }
+
+                binding.workoutDeleteBtn.visibility = View.VISIBLE
+                binding.workoutDeleteBtn.setOnClickListener {
+                    FirebaseDatabase.getInstance("https://gymline-33603-default-rtdb.europe-west1.firebasedatabase.app").getReference("UnfinishedCourses/$tempId/Workouts").child(workout.name.toString()).removeValue()
+
+                    val i = Intent(this@WorkoutsCreator, WorkoutsCreator::class.java)
+                    i.putExtra("currCourseId", tempId)
+                    i.putExtra("currCourseName", tempTitle)
+
+                    startActivity(i)
+                    finish()
+                }
             }
 
         })
 
 
 
+
+        binding.backBtn.setOnClickListener {
+            val i = Intent(this@WorkoutsCreator, ExerciseCreator::class.java)
+            i.putExtra("currCourseId", tempId)
+            i.putExtra("currCourseName", tempTitle)
+            startActivity(i)
+            finish()
+        }
+
     }
 
+    private fun showProgressBar(){
+        dialog = Dialog(this@WorkoutsCreator)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_wait)
+        dialog.setCanceledOnTouchOutside(false)
+        if (!this@WorkoutsCreator.isFinishing) {
+            dialog.show()
+        }
+
+    }
+
+    private fun hideProgressBar(){
+        dialog.dismiss()
+    }
 
 
 

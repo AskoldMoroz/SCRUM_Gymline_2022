@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f310223-c240-4f19-9cfb-d19de62e1f63" name="Changes" comment="fifth commit add InternetConn, CoursesActivity, CourseAdapter.">
+    <list default="true" id="5f310223-c240-4f19-9cfb-d19de62e1f63" name="Changes" comment="sixth commit: design fixes, adding exercises, schedule &amp; workout.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +82,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670955551448</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="sixth commit: design fixes, adding exercises, schedule &amp; workout.">
+      <created>1670956216969</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670956216969</updated>
+    </task>
+    <task id="LOCAL-00007" summary="sixth commit: design fixes, adding exercises, schedule &amp; workout.">
+      <created>1670956235867</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670956235867</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,6 +116,7 @@
     <MESSAGE value="second commit(moving idea &amp; readme files to main folder)" />
     <MESSAGE value="third commit, removed redundant folders" />
     <MESSAGE value="fifth commit add InternetConn, CoursesActivity, CourseAdapter." />
-    <option name="LAST_COMMIT_MESSAGE" value="fifth commit add InternetConn, CoursesActivity, CourseAdapter." />
+    <MESSAGE value="sixth commit: design fixes, adding exercises, schedule &amp; workout." />
+    <option name="LAST_COMMIT_MESSAGE" value="sixth commit: design fixes, adding exercises, schedule &amp; workout." />
   </component>
 </project>
