@@ -13,6 +13,7 @@
         android:backgroundTint="#718AC2"
         android:textAlignment="center"
         app:cardCornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -261,17 +262,16 @@
                                     tools:srcCompat="@tools:sample/avatars" />
                             </androidx.cardview.widget.CardView>
 
-                            <LinearLayout
+                            <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_gravity="center_vertical"
+                                app:cardElevation="0dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
-                                    android:gravity="center"
+                                    android:gravity="center_vertical"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -293,26 +293,44 @@
                                         android:textSize="14sp"
                                         android:textStyle="italic" />
 
-                                    <TextView
-                                        android:id="@+id/openedCourseBought"
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
                                         android:layout_marginTop="10dp"
-                                        android:gravity="center"
-                                        android:text="1000+ purchases" />
+                                        android:layout_marginRight="10dp"
+                                        android:gravity="fill_vertical"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/openedCourseDifficulty"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight=".50"
+                                            android:gravity="center|left"
+                                            android:text="text"
+                                            android:textStyle="bold|italic" />
+
+                                        <TextView
+                                            android:id="@+id/openedCourseType"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight=".50"
+                                            android:gravity="right"
+                                            android:text="TextView"
+                                            android:textStyle="bold|italic" />
+                                    </LinearLayout>
 
                                     <Button
                                         android:id="@+id/button"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
-                                        android:layout_marginTop="10dp"
                                         android:layout_marginRight="30dp"
                                         android:text="Buy" />
-
                                 </LinearLayout>
-
-                            </LinearLayout>
+                            </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
