@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -28,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import java.io.File
+import java.net.URI
 import java.util.*
 
 
@@ -139,6 +141,8 @@ class CoursesActivity : AppCompatActivity() {
                                 val localFile = File.createTempFile("tempImage", "jpg")
 
                                 storageReference.getFile(localFile).addOnSuccessListener {
+
+                                    val uri = Uri.decode(localFile.absolutePath)
 
                                     val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
 

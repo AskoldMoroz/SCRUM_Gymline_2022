@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#7EFFFFFF">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewItem"
@@ -32,7 +30,7 @@
                 app:cardBackgroundColor="#00FFFFFF">
 
                 <ImageView
-                    android:id="@+id/courseImg"
+                    android:id="@+id/exerciseImg"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
@@ -40,8 +38,7 @@
                     android:cropToPadding="false"
                     android:scaleType="centerCrop"
                     android:translationX="-5dp"
-                    android:translationY="-5dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:translationY="-5dp" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
@@ -49,15 +46,16 @@
                 android:layout_height="68dp"
                 android:layout_margin="5dp"
                 android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
                 android:measureWithLargestChild="false"
                 android:orientation="vertical"
                 android:paddingRight="20dp"
                 android:translationX="5dp">
 
                 <TextView
-                    android:id="@+id/courseTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
+                    android:id="@+id/exerciseTitle"
+                    android:layout_width="278dp"
+                    android:layout_height="wrap_content"
                     android:maxLength="50"
                     android:text="Title"
                     android:textColor="#000000"
@@ -65,7 +63,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/courseDesc"
+                    android:id="@+id/exerciseDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -74,19 +72,19 @@
                     android:visibility="gone" />
 
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/exerciseId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
                     android:visibility="gone" />
 
                 <TextView
-                    android:id="@+id/courseAuthor"
+                    android:id="@+id/exerciseRepeats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:maxLength="25"
-                    android:text="Author"
+                    android:text="Repeats:"
                     android:textColor="#6D000000"
                     android:textStyle="italic" />
             </LinearLayout>
@@ -94,5 +92,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

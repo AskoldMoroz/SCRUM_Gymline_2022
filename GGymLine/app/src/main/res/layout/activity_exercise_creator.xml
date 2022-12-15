@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExerciseCreator">
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:alpha="0.3"
+        android:text="No exercises"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textTitlePageCW"
+        app:layout_constraintTop_toBottomOf="@+id/textTitlePageCW" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/textTitlePageCW"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:backgroundTint="#718AC2"
+        android:textAlignment="center"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textTitlePage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="CourseCreator"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/nextStepBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:elevation="20dp"
+                android:text="Next Step" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitlePageCW">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/allCourseExLabelCW"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:cardElevation="6dp">
+
+            <TextView
+                android:id="@+id/allCourseExLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:elevation="0dp"
+                android:text="All course exercises:"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcViewEx"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0.5">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/exOpenAddingBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="10dp"
+            android:text="Add new exercise"
+            android:visibility="visible" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="#727189C1"
+            android:visibility="visible"
+            app:cardCornerRadius="20dp" />
+
+        <ScrollView
+            android:id="@+id/scView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.35">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/descriptionCW"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/exTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="TextView"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/exImgCW"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:id="@+id/exImgView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/exDesc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="20dp"
+                            android:gravity="center"
+                            android:text="TextView"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/removeExBtn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Delete exercise" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/exAddCW"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/exNameAddCW"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:alpha="1"
+                            android:backgroundTint="#31718AC2"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="#7189C1"
+                                    app:cardElevation="10dp">
+
+                                    <TextView
+                                        android:id="@+id/exNameAddLabel"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:gravity="center"
+                                        android:text="Name your exercise!"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="18sp" />
+
+                                </androidx.cardview.widget.CardView>
+
+                                <EditText
+                                    android:id="@+id/inputExName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="20dp"
+                                    android:ems="10"
+                                    android:hint="Enter the name of the exercise"
+                                    android:inputType="textPersonName"
+                                    android:maxLength="50" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/exDescAddCW"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginRight="10dp"
+                            android:backgroundTint="#E3E8F2"
+                            android:visibility="visible"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="#7188C0"
+                                    app:cardElevation="10dp">
+
+                                    <TextView
+                                        android:id="@+id/exDescAddTitle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:gravity="center"
+                                        android:text="Explain the exercise!"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="18sp" />
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:id="@+id/exDescAddTitle2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:gravity="center"
+                                    android:text="Make sure it's easy to complete the exercise by following your description"
+                                    android:textColor="#A4000000"
+                                    android:textSize="16sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="20dp">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/exDescInput"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="#6A7189C1"
+                                        android:hint="Enter the description"
+                                        android:maxLength="1200" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="40dp"
+                                    android:gravity="fill_vertical"
+                                    android:orientation="horizontal" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/exImgAddCW"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginRight="10dp"
+                            android:backgroundTint="#E2E7F1"
+                            android:visibility="visible"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="#7188C0"
+                                    app:cardElevation="10dp">
+
+                                    <TextView
+                                        android:id="@+id/exImgAddTitle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:gravity="center"
+                                        android:text="Upload a describing image"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="18sp" />
+                                </androidx.cardview.widget.CardView>
+
+                                <ImageView
+                                    android:id="@+id/exImgViewSelector"
+                                    android:layout_width="200dp"
+                                    android:layout_height="200dp"
+                                    android:layout_marginTop="20dp"
+                                    android:background="#B3C0DD"
+                                    android:backgroundTint="#B3C0DD"
+                                    android:scaleType="centerCrop"
+                                    app:srcCompat="@android:drawable/stat_sys_upload"
+                                    tools:srcCompat="@android:drawable/stat_sys_upload" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="40dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:gravity="fill_vertical"
+                                    android:orientation="horizontal">
+
+                                    <Button
+                                        android:id="@+id/exAddBtn"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_weight=".65"
+                                        android:text="Add exercise" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
